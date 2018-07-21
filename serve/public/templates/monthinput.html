@@ -1,0 +1,14 @@
+<div class="row">
+	<div class="col-sm-5">
+		<select class="form-control" ng-class="{'btn-default': month.month != ''}" ng-model="month.month" ng-change="month_change(true);">
+			<option value="">Disabled</option>
+			<option ng-repeat="(i, montha) in setup.monthNames" value="{{i+1}}">{{montha}}</option>
+		</select>
+	</div>
+	<div class="col-sm-5">
+		<select  class="form-control" ng-class="{'btn-default': month.year != ''}" ng-model="month.year" ng-change="month_change(false);">
+			<option value="">Disabled</option>
+			<option ng-repeat="year in setup.years" value="{{year}}">{{year}}</option>
+		</select>
+	</div>
+</div>

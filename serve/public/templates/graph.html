@@ -1,0 +1,82 @@
+<h1>Graph</h1>
+<h3 ng-if-start="!n_queries">No Queries</h3>
+<h4 ng-if-end>Click "query" above to add queries to your graph</h4>
+<div ng-if="n_queries" style="margin-top: 50px; margin-bottom: 30px;"class="panel panel-default">
+	<div class="panel-body">
+		<div class="col-sm-6">
+			<table class="table">
+				<thead>
+					<tr>
+						<td style="width: 20px"></td>
+						<td>Query Name</td>
+						<td style="width: 35px"></td>
+						<td style="width: 35px"></td>
+						<td style="width: 35px"></td>
+						<td style="width: 35px"></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="(id,query) in queries">
+						<td><button  style="cursor: default; min-height: 12px;" ng-style="{'background-color': query_colours[id], 'border-color': query_colours[id]}" class="btn btn-xs"></button></td>
+						<td>{{query.name}}</td>
+						<td><button class="btn btn-xs" ng-click="set_display_query(id);"><b ng-if="display_viewed == id">Preview</b><span ng-if="display_viewed != id">Preview</span></button></td>
+						<td><button class="btn btn-xs" ng-click="name_query(id);">Name</button></td>
+						<td><button class="btn btn-xs" ng-click="edit_query(id);">Edit</button></td>
+						<td><button class="btn btn-xs" ng-click="delete_query(id);">Delete</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div col="col-sm-6">
+			<pre style="min-height: 200px; font-size: 11px;">{{queries[display_viewed] | json}}</pre>
+		</div>
+	</div>
+</div>
+
+<div ng-if="n_queries">
+    <div ng-if="domain.domainName=='camera'" class="row" style="padding-left: 15px;">
+   		<hr>
+		<camerainput  cameras="domain.cameras" setup="setup" action="Group" colours="domain.camera_colours"/>
+		<hr style="margin-top: 60px;">
+	</div>
+	<div ng-if="domain.domainName=='law'" class="row" style="padding-left: 15px;">
+		<hr>
+		<lawinput  laws="domain.laws" setup="setup" action="Group" colours="domain.law_colours"/>
+		<hr style="margin-top: 60px;">
+	</div>
+
+	<div ng-if="domain.domainName=='month'" style="margin-top: 40px" class="row">
+		<div class="col-sm-6">
+			<hr>
+			<div class="row" style="margin-bottom:40px;">
+				<button style="cursor: default" class="btn btn-primary">Group by month</button>
+			</div>
+			<div class="form-group">
+				<div class="row"><label class="col-sm-12 control-label">Month From</label></div>
+				<monthinput month="domain.months.from" setup="setup"/> 
+			</div>
+			<div class="form-group">
+				<div class="row"><label class="col-sm-12 control-label">Month To</label></div>
+				<monthinput month="domain.months.to" setup="setup"/>
+				<div class="row" style="padding-top: 8px;"><label style="color: red" class="col-sm-12 control-label"><span ng-if="(domain.months.to.year - domain.months.from.year) * 12 + (domain.months.to.month - domain.months.from.month) > 36">Range too large</span>
+				<span ng-if="(domain.months.to.year - domain.months.from.year) * 12 + (domain.months.to.month - domain.months.from.month) < 1">Invalid range</span></label></div>
+			</div>
+			<hr>
+		</div>
+	</div>
+	<h5>Domain</h5>
+	<select style="margin-bottom: 20px;" class="form-control" ng-model="domain.domainName">
+      <option value="none">None</option>
+      <option value="month">Months</option>
+      <option value="camera">Cameras</option>
+      <option value="law">Laws</option>
+    </select>
+    <h5>Range</h5>
+    <select style="margin-bottom: 20px;" class="form-control" ng-model="range.rangeName">
+      <option value="cases"># cases</option>
+      <option value="total_fine_value/cases">avg fine/case</option>
+      <option value="total_fine_value">total fine amount</option>
+    </select>
+    <button ng-disabled="(domain.domainName == 'camera' && !domain.cameras.length) || (domain.domainName == 'law' && !domain.laws.length) || (domain.domainName == 'month' && (domain.months.to.year - domain.months.from.year) * 12 + (domain.months.to.month - domain.months.from.month) < 1)" class="btn btn-success" ng-click="submit_graph();">Graph</button>
+	<canvas style="min-height: 570px;" id="myChart"></canvas>
+</div>

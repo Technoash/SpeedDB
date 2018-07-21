@@ -1,0 +1,64 @@
+/* HEADER */
+.site_title {
+    font-size: 48px;
+    line-height: 65px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.sign_out_btn {
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.header {
+	background: black;
+	min-height: 100px;
+    color: #EEEEEE;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    margin-top: 0px;
+}
+
+/* END HEADER */
+
+/* LOGIN PAGE */
+.login_page h2 {
+    text-align: center;
+    font-size: 30px;
+    line-height: 65px;
+    font-weight: 600; 
+    color: black;
+}
+
+.login_page form {
+    display: block;
+    text-align: center; 
+}
+
+.login_page .site_button { 
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+/* END LOGIN PAGE */
+
+/* nav.css MODIFICATIONS */
+
+.site_nav ul {
+	padding-left: 0px;
+}
+
+.site_nav li:first-of-type button {
+    margin-left: 0;
+}
+
+/* END nav.css MODIFICATIONS */
+
+/* ALERTS */
+.site_alert {
+	margin-top: 10px;
+}
+/* END ALERTS */

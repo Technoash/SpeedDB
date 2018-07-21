@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="speed" ng-controller="MainCtrl">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{ pageTitle.title() }} - SpeedDB</title>
+		<link href="/speed.css" rel="stylesheet" type="text/css" />
+		<link href="/resources/nav.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/resources/select.min.css" rel="stylesheet" type="text/css" />
+		
+		<script src="/resources/jquery.min.js"></script>
+    <script src="/resources/angular.min.js"></script>
+    <script src="/resources/angular-sanitize.min.js"></script>
+    <script src="/resources/angular-route.min.js"></script>
+    <script src="/resources/bootstrap.min.js"></script>
+    <script src="/resources/select.min.js"></script>
+    <script src="/resources/Chart.bundle.min.js"></script>
+  	<script src="/site.js"></script>
+
+    <base href="/">
+	</head>
+	<body ng-controller="MainCtrl as main">
+		<div class="header">
+			<div class="container">
+    			<h1 class="site_title">Speed Database</h1>
+			</div>
+		</div>
+		<div class="container site_nav">
+      <a href="#!/search"><button class="btn btn-default">SEARCH</button></a>
+      <a href="#!/graph"><button class="btn btn-default">GRAPH</button></a>
+      <a href="#!/query/new"><button class="btn btn-default">QUERY</button></a>
+    </div>
+      <div class="container">
+        <div ng-view></div>
+        
+      </div>
+  </body>
+</html> 

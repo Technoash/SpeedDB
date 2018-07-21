@@ -1,0 +1,21 @@
+<div class="row" style="margin-bottom:40px; margin-top: 50px;">
+	<button class="btn btn-primary" ng-click="add_law();">{{action}} by <span ng-if="laws.length > 0">another </span>law</button>
+</div>
+<span ng-if="laws.length == 0"><b>Click button above to {{action | lowercase}} by law</b></span>
+<span ng-if="laws.length > 0">{{action}} by offences related to law<span ng-if="laws.length > 1">s:</span></span>
+<div class="row" style="padding-bottom: 5px;" ng-repeat="(lawID, law) in laws">
+	<div class="col-xs-10">
+		<ui-select style="width: 100%" ng-model="law.value">
+		    <ui-select-match>
+		        <span>{{$select.selected.section}} - {{$select.selected.legislation}}</span>
+		    </ui-select-match>
+		    <ui-select-choices repeat="lawa in (setup.laws | filter: $select.search) track by lawa.legislation+'|'+lawa.section">
+		        <span ng-bind="lawa.legislation"></span>
+		        <span ng-bind="lawa.section"></span>
+		    </ui-select-choices>
+		</ui-select>
+	</div>
+	<div class="col-xs-2">
+		<button class="btn btn-link" ng-style="{'background-color': colours[lawID]}" ng-click="remove_law(lawID);">X</button>
+	</div>
+</div>

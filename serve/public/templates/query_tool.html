@@ -1,0 +1,143 @@
+<h1>Query Tool</h1>
+<h3><span ng-if="editSearch">Edit "<u>{{query.name}}</u>"</span><span ng-if="!editSearch">New Query</span></h3>
+<div class="row" style="margin-bottom:40px; margin-top: 35px;">
+	<div class="col-sm-6">
+		<div class="row" style="margin-bottom:20px;">
+			<button style="cursor: default" class="btn btn-primary">Limit by offence type</button>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="query.offence_type" ng-change='offence_type_change(query.offence_type);' value="none">
+						No limit
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="query.offence_type" ng-change='offence_type_change(query.offence_type);' value="speed">
+						Speed cameras only
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" ng-model="query.offence_type" ng-change='offence_type_change(query.offence_type);' value="red">
+						Red light cameras only
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="row" style="margin-bottom:20px;">
+			<button style="cursor: default" class="btn btn-primary">Limit by speed</button>
+		</div>
+		<!--'10-', '30+', '20+', '10+', '45+'-->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="query.speed_filter['10-']" ng-disabled="query.offence_type == 'red'">
+						less than <b>10km/h</b>
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="query.speed_filter['10+']" ng-disabled="query.offence_type == 'red'">
+						<b>10km/h</b> or more
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="query.speed_filter['20+']" ng-disabled="query.offence_type == 'red'">
+						<b>20km/h</b> or more
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="query.speed_filter['30+']" ng-disabled="query.offence_type == 'red'">
+						<b>30km/h</b> or more
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" ng-model="query.speed_filter['45+']" ng-disabled="query.offence_type == 'red'">
+						<b>45km/h</b> or more
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<hr style="margin-top: 50px;">
+
+<div class="row" style="margin-top: 50px;">
+	<div class="col-sm-6">
+		<div class="row" style="margin-bottom:40px;">
+			<button style="cursor: default" class="btn btn-primary">Limit by month</button>
+		</div>
+		<div class="form-group">
+			<div class="row"><label class="col-sm-12 control-label">Month From</label></div>
+			<monthinput month="query.month.from" setup="setup"/> 
+		</div>
+		<div class="form-group">
+			<div class="row"><label class="col-sm-12 control-label">Month To</label></div>
+			<monthinput month="query.month.to" setup="setup"/> 
+		</div>
+
+	</div>
+	<div class="col-sm-6">
+		<div class="row" style="margin-bottom:40px;">
+			<button style="cursor: default" class="btn btn-primary">Limit by estimated fine</button>
+		</div>
+		<div class="form-group">
+			<div class="row"><label class="col-sm-12 control-label">Fine From</label></div>
+			<div class="row">
+				<div class="col-md-5">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" class="form-control" ng-class="{'btn-default': isPosInt(query.fine_from) }" ng-model="query.fine_from" placeholder="Amount">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row"><label class="col-sm-12 control-label">Fine To</label></div>
+			<div class="row">
+				<div class="col-md-5">
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" class="form-control" ng-class="{'btn-default': isPosInt(query.fine_to) }" ng-model="query.fine_to" placeholder="Amount">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr style="margin-top: 50px;">
+
+<lawinput laws="query.laws" setup="setup" action="Limit"/>
+
+<hr style="margin-top: 70px;">
+
+<camerainput cameras="query.cameras" setup="setup" action="Limit"/>
+<hr style="margin-top: 70px;">
+
+<querydisplay query="query"/> 
+
+<div class="row" style="margin-bottom: 50px; margin-top: 100px;">
+	<div class="col-md-2">
+		<button style="width: 100%;" class="btn" ng-click="reset_query();">Reset Query</button>
+	</div>
+	<div class="col-md-2" ng-class="{'col-md-offset-4': editSearch, 'col-md-offset-6': !editSearch}">
+		<button style="width: 100%;" class="btn btn-default" ng-click="search();">Search</button>
+	</div>
+	<div class="col-md-2">
+		<button style="width: 100%;" class="btn btn-default" ng-click="add_to_graph();">Add to Graph</button>
+	</div>
+	<div class="col-md-2">
+		<button ng-if="editSearch" style="width: 100%;" class="btn btn-primary" ng-click="update_graph_query();">Update</button>
+	</div>
+</div>

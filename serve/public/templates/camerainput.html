@@ -1,0 +1,24 @@
+<div class="row" style="margin-bottom:40px; margin-top: 50px;">
+	<button class="btn btn-primary" ng-click="add_camera();">{{action}} by <span ng-if="cameras.length > 0">another </span>camera</button>
+</div>
+
+<span ng-if="cameras.length == 0"><b>Click button above to {{action | lowercase}} by camera</b></span>
+<span ng-if="cameras.length > 0">{{action}} offences by camera<span ng-if="cameras.length > 1">s:</span></span>
+
+<div class="row" style="padding-bottom: 5px;" ng-repeat="(cameraID, camera) in cameras">
+	<div class="col-xs-10">
+		<ui-select style="width: 100%" ng-model="camera.value">
+		    <ui-select-match>
+		        <span>{{$select.selected.location_description}} - {{$select.selected.type}}</span>
+		    </ui-select-match>
+		    <ui-select-choices repeat="cameraa in (setup.cameras | filter: $select.search) track by cameraa.location_code">
+		        <b><span ng-bind="cameraa.type"></span></b>
+		        <span ng-bind="cameraa.location_description"></span>
+		        
+		    </ui-select-choices>
+		</ui-select>
+	</div>
+	<div class="col-xs-2">
+		<button class="btn btn-link" ng-style="{'background-color': colours[cameraID]}" ng-click="remove_camera(cameraID);">X</button>
+	</div>
+</div>

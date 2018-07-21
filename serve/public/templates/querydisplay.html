@@ -1,0 +1,5 @@
+<button style="margin-bottom: 10px;"  class="btn-sm btn btn-info" ng-click="toggle();"><span ng-if="hidden">Show Query JSON</span><span ng-if="!hidden">Hide</span></button>
+<button ng-if-start="!hidden" ng-click="size_increase();">+</button>
+<button ng-click="size_decrease();">-</button>
+<pre style="margin-bottom: 10px;" ng-if-end ng-style="{'font-size': size + 'px'}">{{query | json}}</pre>
+<hr ng-if="!hidden">

@@ -1,0 +1,39 @@
+<h1>Search</h1>
+<querydisplay ng-if="responded" query="query"/> 
+<h3 ng-if-start="!query">No Query</h3>
+<h4 ng-if-end>Click "query" above to make one</h4>
+<h3 ng-if="query && !responded">Searching</h3>
+<h3 ng-if="responded && query && !results.length">No Results</h3>
+<div class="panel panel-default" ng-repeat="result in results">
+  <div class="panel-body">
+    <h4>{{result.cases}} case<span ng-if="result.cases > 1">s</span></h4>
+    <h5>{{result.description}}</h5>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
+          <dl class="dl-horizontal">
+            <dt>Location</dt>
+            <dd>{{result.location_description}}</dd>
+            <dt>Camera Type</dt>
+            <dd>{{result.camera_type}}</dd>
+            <dt>Month</dt>
+            <dd>{{formatMonth(result.month)}}</dd>
+            <dt>Total Fine Value</dt>
+            <dd>${{result.total_fine_value}}</dd>
+          </dl>
+        </div>
+        <div class="col-md-6">
+          <dl class="dl-horizontal">
+            <dt>Law Legislation</dt>
+            <dd>{{result.law_legislation}}</dd>
+            <dt>Law Section</dt>
+            <dd>{{result.law_section}}</dd>
+            <dt></dt>
+            <dd></dd>
+            <dt>Avg Individual Fine</dt>
+            <dd>${{result.total_fine_value/result.cases}}</dd>
+          </dl>
+        </div>
+    </div>
+  </div>
+</div>
