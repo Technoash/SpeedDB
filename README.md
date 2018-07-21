@@ -5,5 +5,5 @@ Allows its users to do complex queries on a government speed camera dataset from
 
 Access a live version at http://speeddb.technoash.com
 
-![Screenshot of functionality 1](/screenshots/months.jpg?raw=true "Screenshot of functionality 1")
-![Screenshot of functionality 2](/screenshots/lwas.jpg?raw=true "Screenshot of functionality 2")
+![Screenshot of functionality 1](https://raw.githubusercontent.com/Technoash/SpeedDB/master/screenshots/months.jpg?raw=true "Screenshot of functionality 1")
+![Screenshot of functionality 2](https://raw.githubusercontent.com/Technoash/SpeedDB/master/screenshots/laws.jpg?raw=true "Screenshot of functionality 2")
