@@ -1,5 +1,5 @@
 # SpeedDB
-INFO2120 (semester 2 2017) assignment built with Angular, PostgreSQL, Node.js, Bootstrap. A database query tool.
+INFO 1903 (semester 1 2017) assignment built with Angular, PostgreSQL, Node.js, Bootstrap. A database query tool.
 
 Allows its users to do complex queries on a government speed camera dataset from a web interface. The dataset was originally in CSV format
 

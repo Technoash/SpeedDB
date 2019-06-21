@@ -1,0 +1,12 @@
+version: "3"
+services:
+  app:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - "7000:7000"
+  postgres:
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_PASSWORD: animal
